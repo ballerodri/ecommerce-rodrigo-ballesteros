@@ -1,22 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
-import Seccion from './Seccion.js'
+import "./styles/styles.scss";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Hola mundo!</h1>
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
-
-      <Seccion/>
-      <Seccion/>
-      <Seccion/>
-      <Seccion/>
-    </div>
-  );
+    return (
+          <NavBar/>
+    );
 }
 
 export default App;
