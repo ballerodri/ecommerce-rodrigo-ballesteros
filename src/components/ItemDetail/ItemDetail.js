@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { CartContext } from "../../context/CartContext"
 import { ItemCount } from "../ItemCount/ItemCount"
 import Select from "../Select/Select"
@@ -15,6 +15,7 @@ export const ItemDetail = ({ id, nombre, img, desc, precio, stock, categoria }) 
 
     const [cantidad, setCantidad] = useState(0)
     const [talle, setTalle] = useState('M')
+    const navigate = useNavigate();
 
     const { agregarAlCarrito, isInCart } = useContext(CartContext)
 
@@ -48,7 +49,7 @@ export const ItemDetail = ({ id, nombre, img, desc, precio, stock, categoria }) 
             </div> 
             {
                 isInCart(id)
-                    ? <Link to="/cart" className="btn btn-success my-3">Terminar mi compra</Link>
+                    ? <Link to="/cart" className="btn btn-success my-3">Terminar mi compra</Link>                 
                     :
                     <>
                         <ItemCount
@@ -59,6 +60,8 @@ export const ItemDetail = ({ id, nombre, img, desc, precio, stock, categoria }) 
                         <button className="btn btn-secondary my-2" onClick={handleAgregar}>Agregar al carrito</button>
                     </>
             }
+            <hr/>
+            <button className="btn btn-secondary my-3" onClick={() => navigate(-1)}>Volver</button>
         </div>
     )
 }
