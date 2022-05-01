@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 
 
 export const ItemCount = ({max, min = 0, counter, setCounter}) => {
@@ -11,7 +12,6 @@ export const ItemCount = ({max, min = 0, counter, setCounter}) => {
     const handleRestar = () => {
         counter > min && setCounter(counter - 1)
     }
-
 
     return (
         <div>

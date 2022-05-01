@@ -28,7 +28,6 @@ function App() {
           <Route path="/contacto" element={ <Contacto/>}/>
           <Route path="/cart" element={ <Cart/>}/>
 
-
           <Route path="*" element={ <Navigate to="/"/>}/>
         </Routes>
 

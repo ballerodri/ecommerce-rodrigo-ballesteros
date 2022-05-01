@@ -6,7 +6,7 @@ export const stock = [
         desc: '15% de descuento pagando con Efectivo/Transferencia',
         precio: 820,
         img: 'https://i.ibb.co/W5WjtTq/TOP-LEXY.jpg',
-        stock: 50,
+        stock: 2,
         category: 'tops'
     },
     {
@@ -15,7 +15,7 @@ export const stock = [
         desc: '15% de descuento pagando con Efectivo/Transferencia',
         precio: 1240,
         img: 'https://i.ibb.co/dPjFCr1/TOP-CASSIE.jpg',
-        stock: 50,
+        stock: 5,
         category: 'tops'
     },
     {
@@ -24,7 +24,7 @@ export const stock = [
         desc: '15% de descuento pagando con Efectivo/Transferencia',
         precio: 1250,
         img: 'https://i.ibb.co/NFv9mCf/MUSCULOSA-BASICA-MORLEY.jpg',
-        stock: 50,
+        stock: 10,
         category: 'remeras'
     },
     {
@@ -51,7 +51,7 @@ export const stock = [
         desc: '15% de descuento pagando con Efectivo/Transferencia',
         precio: 4480,
         img: 'https://i.ibb.co/pJh111Y/POLERA-EMMA.jpg',
-        stock: 50,
+        stock: 0,
         category: 'sweaters'
     },
     {
