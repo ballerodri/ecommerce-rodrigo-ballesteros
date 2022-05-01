@@ -1,32 +1,32 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { pedirDatos } from "../../helpers/pedirDatos"
 import { ItemList } from "../ItemList/ItemList"
+import { db } from "../../firebase/config"
+import { collection, getDocs, query, where } from "firebase/firestore"
 
- 
+
 export const ItemListContainer = () => {
-    
+
     const [productos, setProductos] = useState([])
     const [loading, setLoading] = useState(false)
 
     const { categoryId } = useParams()
 
-    useEffect( () => {
+    useEffect(() => {
         setLoading(true)
-
-        pedirDatos()
-            .then((res) => {
-                if (categoryId) {
-                    setProductos( res.filter( (prod) => prod.category === categoryId) )
-                } else {
-                    setProductos( res )
-                }
-            })
-            .catch((err) => {
-                console.log(err)
+        const productosRef = collection(db, 'productos')
+        const q = categoryId ? query(productosRef, where("category", "==", categoryId)) : productosRef
+        getDocs(q)
+            .then((resp) => {
+                setProductos(resp.docs.map((doc) => {
+                    return {
+                        id: doc.id,
+                        ...doc.data()
+                    }
+                }))
             })
             .finally(() => {
-               setLoading(false)
+                setLoading(false)
             })
 
     }, [categoryId])
@@ -34,10 +34,10 @@ export const ItemListContainer = () => {
     return (
         <>
             {
-                loading 
-                    ? <img src="/Spinner-1s-100px.gif"/> 
-                    : <ItemList productos={productos}/>
-            } 
+                loading
+                    ? <img src="/Spinner-1s-100px.gif" />
+                    : <ItemList productos={productos} />
+            }
         </>
     )
 }

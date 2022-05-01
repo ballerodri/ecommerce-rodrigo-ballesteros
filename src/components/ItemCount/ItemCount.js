@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-
+import { configBtns } from "./configBtns"
 
 export const ItemCount = ({max, min = 0, counter, setCounter}) => {
 
@@ -13,11 +13,17 @@ export const ItemCount = ({max, min = 0, counter, setCounter}) => {
         counter > min && setCounter(counter - 1)
     }
 
-    return (
+    const {configRestar, configSumar} = configBtns(counter, max, min, handleRestar, handleSumar)
+
+       return (
         <div>
-            <button className="btn btn-outline-secondary" onClick={handleRestar}>-</button>
+            <button {...configRestar}>
+                -
+            </button>
             <span className="mx-3">{counter}</span>
-            <button className="btn btn-secondary" onClick={handleSumar}>+</button>
+            <button {...configSumar}>
+                +
+            </button>
         </div>
     )
 }
