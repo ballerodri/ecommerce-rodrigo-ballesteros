@@ -1,36 +1,23 @@
-import React, { useState } from 'react'
 
-const ItemCount = ({stock}) => {
 
-const [counter, setCounter] = useState(1)
+export const ItemCount = ({max, min = 0, counter, setCounter}) => {
 
-const sumar = () =>{
-    if(counter < stock){
-        setCounter( counter + 1)
+    
+    const handleSumar = (e) => {
+        // op lógico AND
+        counter < max && setCounter(counter + 1)
     }
-}
-const restar = () =>{
-    if(counter > 0){
-        setCounter( counter - 1)
-    }
-}
 
-const onAdd = () =>{
-    if (counter > 0) {
-    console.log({counter})
+    const handleRestar = () => {
+        counter > min && setCounter(counter - 1)
     }
-}
 
-  return (
-    <div>
-        <button className="btn btn-light" onClick={restar}>-</button>
-        <span className="mx-3">{counter}</span>
-        <button className="btn btn-light" onClick={sumar}>+</button>
+
+    return (
         <div>
-        <button className="btn btn-secondary my-2" onClick={onAdd}>Agregar al carrito</button>
+            <button className="btn btn-outline-secondary" onClick={handleRestar}>-</button>
+            <span className="mx-3">{counter}</span>
+            <button className="btn btn-secondary" onClick={handleSumar}>+</button>
         </div>
-    </div>
-  )
+    )
 }
-
-export default ItemCount

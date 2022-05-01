@@ -1,32 +1,38 @@
+import { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { pedirDatos } from "../../helpers/pedirDatos";
+import ItemDetail from "../ItemDetail/ItemDetail";
 
-import React, { useEffect, useState } from 'react';
-import { getProducts } from '../../mocks/FakeApi';
-import ItemDetail from '../ItemDetail/ItemDetail';
+const ItemDetailContainer = () => {
 
-export const ItemDetailContainer = (itemId) => {
-
-    const [loading, setLoading] = useState(true)
     const [item, setItem] = useState(null)
+    const [loading, setLoading] = useState(true)
+
+    const { itemId } = useParams()
 
     useEffect(() => {
         setLoading(true)
 
-        getProducts
+        pedirDatos()
             .then((res) => {
-                setItem( res.find((item) => item.id === '2') )
+                setItem( res.find((prod) => prod.id === Number(itemId)))
             })
             .finally(() => {
                 setLoading(false)
             })
-    }, [])
+
+    }, [itemId])
 
     return (
-        <div className='container my-5'>
+        <Container className="my-5">
             {
-                loading 
+                loading
                 ? <img src="/Spinner-1s-100px.gif"/>
                 : <ItemDetail {...item}/>
             }
-        </div>
-)
-};
+        </Container>
+    )
+}
+
+export default ItemDetailContainer
