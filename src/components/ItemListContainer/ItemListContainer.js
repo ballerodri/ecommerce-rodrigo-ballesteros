@@ -1,16 +1,36 @@
-import ItemCount from '../ItemCount/ItemCount'
-import './ItemListContainer.css'
+import { useEffect, useState } from "react"
+import { pedirDatos } from "../../helpers/pedirDatos"
+import { ItemList } from "../ItemList/ItemList"
 
-export const ItemListContainer = ( {greeting} ) => {
+ 
+export const ItemListContainer = () => {
+    
+    const [productos, setProductos] = useState([])
+    const [loading, setLoading] = useState(false)
+
+    useEffect( () => {
+        setLoading(true)
+
+        pedirDatos()
+            .then((res) => {
+                setProductos( res )
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+            .finally(() => {
+               setLoading(false)
+            })
+
+    }, [])
 
     return (
-        <section className="item-list-container">
-            <h2>{greeting}</h2>
-            <hr/>
-            <p>MUSCULOSA BASICA MORLEY</p>
-            <ItemCount 
-                stock="10"
-            />
-        </section>
+        <>
+            {
+                loading 
+                    ? <img src="/Spinner-1s-100px.gif"/> 
+                    : <ItemList productos={productos}/>
+            } 
+        </>
     )
 }
