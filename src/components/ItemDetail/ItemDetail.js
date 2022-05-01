@@ -19,7 +19,7 @@ const ItemDetail = ({id, nombre, desc, img, precio, stock, category}) => {
     const navigate = useNavigate()
 
     const handleNavigate = () => {
-        navigate(-1)
+        navigate("/cart")
     }
 
     return (
@@ -37,7 +37,7 @@ const ItemDetail = ({id, nombre, desc, img, precio, stock, category}) => {
             />
             <button className="btn btn-secondary my-2" onClick={handleAgregar}>Agregar al carrito</button>
             <hr/>
-            <button className="btn btn-outline-secondary" onClick={handleNavigate}>Volver</button>
+            <button className="btn btn-outline-secondary" onClick={handleNavigate}>Terminar mi compra</button>
         </div>
     )
 }
