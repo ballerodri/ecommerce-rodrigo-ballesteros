@@ -9,7 +9,7 @@ export const getProducts = new Promise((resolve, reject) => {
     if (condition) {
         setTimeout(() => {
             resolve(stockApi)
-        }, 3000)
+        }, 2000)
     } else {
         reject('fail')
     }

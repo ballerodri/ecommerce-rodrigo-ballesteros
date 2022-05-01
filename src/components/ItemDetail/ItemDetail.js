@@ -1,45 +1,56 @@
-import { useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { Link } from "react-router-dom"
+import { CartContext } from "../../context/CartContext"
 import { ItemCount } from "../ItemCount/ItemCount"
 
-const ItemDetail = ({id, nombre, desc, img, precio, stock, category}) => {
+
+
+export const ItemDetail = ({id, nombre, img, desc, precio, stock, categoria}) => {
 
     const [cantidad, setCantidad] = useState(0)
+
+    const { agregarAlCarrito, isInCart } = useContext(CartContext)
 
     const handleAgregar = () => {
         if (cantidad === 0) return
 
-        const addItem = {
-            id, nombre, precio, stock, cantidad
-        }
-
-        console.log(addItem)
-    }
+        if (!isInCart(id)) {
+            const addItem = {
+                id, nombre, precio, stock, cantidad
+            }
     
-    const navigate = useNavigate()
-
-    const handleNavigate = () => {
-        navigate("/cart")
+            agregarAlCarrito(addItem)
+        }
     }
 
     return (
         <div>
-            <h2>{nombre}</h2>
-            <img src={img} alt={nombre}></img>
+            <h3>{nombre}</h3>
+            <img src={img} alt={nombre}/>
             <p>{desc}</p>
-            <h4>Precio: ${precio}</h4>
-            <small>Stock disponible: {stock}</small>
+            <h5>Precio: ${precio}</h5>
 
-            <ItemCount 
-                max={stock} 
-                counter={cantidad} 
-                setCounter={setCantidad}
-            />
-            <button className="btn btn-secondary my-2" onClick={handleAgregar}>Agregar al carrito</button>
-            <hr/>
-            <button className="btn btn-outline-secondary" onClick={handleNavigate}>Terminar mi compra</button>
+            {
+                isInCart(id) 
+                ?  <Link to="/cart" className="btn btn-success my-3">
+                        Terminar mi compra
+                    </Link>
+                :
+                    <>
+                        <ItemCount 
+                            max={stock} 
+                            counter={cantidad} 
+                            setCounter={setCantidad}
+                        />
+
+                        <button
+                            className="btn btn-secondary my-2"            
+                            onClick={handleAgregar}
+                        >
+                            Agregar al carrito
+                        </button>
+                    </>
+            }
         </div>
     )
 }
-
-export default ItemDetail

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { pedirDatos } from "../../helpers/pedirDatos";
-import ItemDetail from "../ItemDetail/ItemDetail";
+import { ItemDetail } from "../ItemDetail/ItemDetail";
 
 const ItemDetailContainer = () => {
 
