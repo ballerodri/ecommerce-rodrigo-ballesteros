@@ -2,6 +2,7 @@ import { collection, addDoc, Timestamp, updateDoc, doc, getDoc } from "firebase/
 import { useContext, useState } from "react"
 import { Link, Navigate } from "react-router-dom"
 import { CartContext } from "../../context/CartContext"
+import { useAuth } from "../../context/AuthContext";
 import { db } from "../../firebase/config"
 
 
@@ -9,6 +10,7 @@ import { db } from "../../firebase/config"
 export const Checkout = () => {
 
     const {cart, totalCart, vaciarCart} = useContext(CartContext)
+    const { user } = useAuth();
 
     const [orderId, setOrderId] = useState(null)
 
@@ -44,7 +46,7 @@ export const Checkout = () => {
 
     const [values, setValues] = useState({
         nombre: '',
-        email: '',
+        email: user.email,
         tel: '',
     })
 
@@ -81,13 +83,17 @@ export const Checkout = () => {
                 <h2>Gracias por tu compra!</h2>
                 <hr/>
                 <h3>Tu número de orden es: {orderId}</h3>
-                <Link to="/" className="btn btn-primary">Volver</Link>
+                <Link to="/" className="btn btn-secondary">Volver</Link>
             </div>
         )
     }
 
     if (cart.length === 0) {
         return <Navigate to="/"/>
+    }
+
+    if (user === null) {
+        return <Navigate to="/login"/>
     }
 
     return (
@@ -99,7 +105,7 @@ export const Checkout = () => {
                 <input
                     className="form-control my-2"
                     type='text'
-                    placeholder="Tu nombre"
+                    placeholder='Tu Nombre'
                     value={values.nombre}
                     onChange={handleInputChange}
                     name='nombre'
@@ -107,10 +113,11 @@ export const Checkout = () => {
                 <input
                     className="form-control my-2"
                     type='email'
-                    placeholder="Tu email"
+                    placeholder="Tu Email"
                     value={values.email}
                     onChange={handleInputChange}
                     name='email'
+                    disabled={true}
                 />
                 <input
                     className="form-control my-2"
@@ -121,9 +128,9 @@ export const Checkout = () => {
                     name='tel'
                 />
 
-                <button type="submit" className="btn btn-primary">
-                    Enviar
-                </button>
+                <button type="submit" className="btn btn-secondary">Enviar</button>
+                <hr/>
+                <Link to="/" className="btn btn-secondary">Volver</Link>
             </form>
         </div>
     )

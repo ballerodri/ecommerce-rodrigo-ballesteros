@@ -1,12 +1,14 @@
-.cart-widget {
+.login-widget {
     font-size: 20px;
     color: rgba(0, 0, 0, 0.55);
     visibility: visible;
     opacity: 1;
     transition: all .5s ease-out;
     text-decoration:none;
+    margin-right: 10px ;
 
     span {
+        margin: 0 5px auto;
         font-size: 14px;
     }
     

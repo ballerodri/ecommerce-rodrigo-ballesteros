@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { CartWidget } from '../CartWidget/CartWidget'
+import { LoginWidget } from "../LoginWidget/LoginWidget";
 
 export const NavBar = () => {
 
@@ -28,14 +29,16 @@ export const NavBar = () => {
                                 <li><Link to="/category/pantalones" className="dropdown-item" >PANTALONES</Link></li>
                                 <li><Link to="/category/chalecos" className="dropdown-item" >CHALECOS</Link></li>
                                 <li><Link to="/category/bodys" className="dropdown-item" >BODYS</Link></li>
-                                {/* <li><hr className="dropdown-divider" /></li> */}
-                                {/* <li><a className="dropdown-item" >ACCESORIOS</a></li> */}
                             </ul>
                         </li>
                         <li className="nav-item">
                             <Link to="/contacto" className="nav-link" >CONTACTO</Link>
+                        </li>  
+                        <li className="nav-item">
+                            <Link to="/nosotros" className="nav-link" >NOSOTROS</Link>
                         </li>
                     </ul>
+                    <LoginWidget />
                     <CartWidget />
                 </div>
             </div>

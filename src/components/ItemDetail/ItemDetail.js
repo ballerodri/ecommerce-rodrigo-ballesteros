@@ -2,19 +2,19 @@ import { useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { CartContext } from "../../context/CartContext"
 import { ItemCount } from "../ItemCount/ItemCount"
-import Select from "../Select/Select"
+// import Select from "../Select/Select"
 
-const options = [
-    {value: 'L', text: 'Large'},
-    {value: 'M', text: 'Medium'},
-    {value: 'S', text: 'Small'},
-    {value: 'XS', text: 'XSmall'}
-]
+// const options = [
+//     {value: 'L', text: 'Large'},
+//     {value: 'M', text: 'Medium'},
+//     {value: 'S', text: 'Small'},
+//     {value: 'XS', text: 'XSmall'}
+// ]
 
 export const ItemDetail = ({ id, nombre, img, desc, precio, stock, categoria }) => {
 
     const [cantidad, setCantidad] = useState(0)
-    const [talle, setTalle] = useState('M')
+    // const [talle, setTalle] = useState('M')
     const navigate = useNavigate();
 
     const { agregarAlCarrito, isInCart } = useContext(CartContext)
@@ -39,17 +39,17 @@ export const ItemDetail = ({ id, nombre, img, desc, precio, stock, categoria }) 
             <h5>Precio: ${precio}</h5>
             <small>Stock disponible: {stock}</small>
             {stock === 0 && <p className="stock">¡Producto sin stock!</p>}
-            {stock <= 3 && stock != 0 && <p className="stock">¡Últimas unidades!</p>}
+            {stock <= 3 && stock !== 0 && <p className="stock">¡Últimas unidades!</p>}
 
             <div className="my-2">   
-            <Select
+            {/* <Select
                 options={options}
                 onSelect={setTalle}
-            />
+            /> */}
             </div> 
             {
                 isInCart(id)
-                    ? <Link to="/cart" className="btn btn-success my-3">Terminar mi compra</Link>                 
+                    ? <Link to="/cart" className="btn btn-secondary my-3">Terminar mi compra</Link>                 
                     :
                     <>
                         <ItemCount

@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { BsFillCartFill } from 'react-icons/bs'
+import { BsFillBagFill } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import { CartContext } from '../../context/CartContext'
 
@@ -9,8 +9,8 @@ export const CartWidget = () => {
 
     return (
         <Link to="/cart" className='cart-widget'>
-            <BsFillCartFill/>
-            <span>{cantidadCart()}</span>
+            <BsFillBagFill />
+            <span>( {cantidadCart()} )</span>
         </Link>
     )
 }

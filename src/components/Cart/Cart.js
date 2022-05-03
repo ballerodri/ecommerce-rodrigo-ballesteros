@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { CartContext } from "../../context/CartContext"
 import { BsFillTrashFill } from 'react-icons/bs'
 import { Link, useNavigate } from "react-router-dom"
+import { getAuth } from "firebase/auth";
 
 
 export const Cart = () => {
@@ -18,6 +19,16 @@ export const Cart = () => {
         </div>
     }
 
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user == null) {
+        return <div className="container my-4">
+            <h5>Por favor ingresa para seguir con tu compra.</h5>
+            <Link to={"/login"} className="btn btn-secondary my-3">INICIAR SESIÓN</Link>
+        </div>
+    }
+
     return (
         <div className="container my-4">
             <h2>Tu compra</h2>
@@ -29,7 +40,7 @@ export const Cart = () => {
                         <h4>{item.nombre}</h4>
                         <p>Cantidad: {item.cantidad}</p>
                         <p>Precio: ${item.cantidad * item.precio}</p>
-                        <button className="btn btn-danger" onClick={() => eliminarItem(item.id)}>
+                        <button className="btn btn-secondary" onClick={() => eliminarItem(item.id)}>
                             <BsFillTrashFill />
                         </button>
                     </div>
@@ -40,8 +51,8 @@ export const Cart = () => {
             <h2>Total: ${totalCart()}</h2>
 
             <div className="my-2">
-                <button className="btn btn-danger" onClick={vaciarCart}>Vaciar carrito</button>
-                <Link to="/checkout" className="btn btn-success mx-2">Terminar mi compra</Link>
+                <button className="btn btn-secondary" onClick={vaciarCart}>Vaciar carrito</button>
+                <Link to="/checkout" className="btn btn-secondary mx-2">Terminar mi compra</Link>
                 <hr/>
                 <button className="btn btn-secondary my-3" onClick={() => navigate(-1)}>Volver</button>
             </div>
